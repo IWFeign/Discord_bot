@@ -12,16 +12,6 @@ from bs4 import BeautifulSoup
 client = commands.Bot(command_prefix="!")
 client.remove_command('help')
 TOKEN = os.environ['TOKEN']
-magical_words = ("31", "69", "otuzbir", "otuz bir", "otzbir", "osbir", "otzbr",
-                 "otsbr", "ozbir", "ozbr", "osbr")
-magical_reply = ("puşt", "ibne", "atak helikopteri", "şorolo", "piç", "dığa",
-                 "pezevenk", "gavat", "dürzü", "lavuk")
-magical_reply_positive = ("efendim", "hizmetkarım", "majesteleri", "kralım",
-                          "kraliçem", "imparatorum", "düküm", "prensim",
-                          "prensesim", "lordum", "sultanım", "şahım",
-                          "padişahım", "kağanım", "hanım", "yengem",
-                          "firavunum")
-
 
 #%% Prints a message lets you understand bot is on
 @client.event
@@ -365,55 +355,6 @@ async def dolar(ctx):
 
 # called_once_a_day.start()
 
-
-#%% mesajlara cevap veren kısım
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    msg = message.content
-
-    #if any(word in msg.lower() for word in magical_words): #Emotelara da sj atıyor buglı
-
-    if msg.startswith(magical_words):
-        await message.channel.send("sj")
-
-    if any(word in msg.lower() for word in ["köle"]):
-        sans = np.random.randint(10)
-        if sans <= 4:
-            await message.channel.send(
-                "Esas köle sensin " +
-                magical_reply[np.random.randint(len(magical_reply))] + " " +
-                message.author.mention)
-            if message.author.id == 142582012191047682:
-                await message.channel.send("<:atakan:815609705077669930>")
-            elif message.author.id == 137969279965331456:
-                await message.channel.send("<:serkan:815609705866592306>")
-            elif message.author.id == 142582870836248576:
-                await message.channel.send("<:oguz:815609705720053780>")
-            elif message.author.id == 325207542743564289:
-                await message.channel.send("<:altas:902654415113179138>")
-            elif message.author.id == 679772100633821270:
-                await message.channel.send("<:pamuk:902654415591317545>")
-            elif message.author.id == 700721583580381234:
-                await message.channel.send("<:okan:902654414567903283>")
-            elif message.author.id == 884468326942801980:
-                await message.channel.send("<:okan:902654414567903283>")
-            elif message.author.id == 386230824627863552:
-                await message.channel.send("<:aziz:902654654146576434>")
-            elif message.author.id == 274914707452985345:
-                await message.channel.send("<:furkan:902633413926879233>")
-        else:
-            await message.channel.send(
-                "Emrinizdeyim " + magical_reply_positive[np.random.randint(
-                    len(magical_reply_positive))] + " " +
-                message.author.mention)
-    else:
-        await client.process_commands(message)
-
-
-#keep_alive()
 try:
     client.run(os.getenv('TOKEN'))
 except discord.errors.HTTPException:
